@@ -1,13 +1,13 @@
 function(add_git_submodule dir)
     find_package(Git REQUIRED)
 
-    if (NOT EXISTS ${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt)
-        execute_process(COMMAND ${GIT_EXECUTABLE}
-            submodule update --init --recursive -- ${dir}
-            WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+    if(NOT EXISTS ${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt)
+        execute_process(
+            COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --
+                    ${dir} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
     endif()
 
-    if (EXISTS ${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt)
+    if(EXISTS ${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt)
         message("Adding ${dir}/CMakeList.txt")
         add_subdirectory(${CMAKE_SOURCE_DIR}/${dir})
     else()

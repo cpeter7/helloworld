@@ -1,6 +1,4 @@
-#ifndef _MYLIB_H_
-#define _MYLIB_H_
+#pragma once
 
-void print_hello_world();
-
-#endif
+int print_hello_world();
+std::uint32_t factorial(std::uint32_t number);
