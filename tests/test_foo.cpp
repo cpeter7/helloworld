@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "mylib.h"
+#include "foo.h"
 
 TEST_CASE("factorial1") {
   REQUIRE(factorial(0) == 1);
@@ -10,4 +10,7 @@ TEST_CASE("factorial1") {
   REQUIRE(factorial(10) == 3'628'800);
 }
 
-TEST_CASE("helloworld") { REQUIRE(print_hello_world() == 1); }
+TEST_CASE("helloworld") 
+{ 
+  REQUIRE(print_hello_world() == 1); 
+}

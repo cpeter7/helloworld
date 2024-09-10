@@ -3,13 +3,13 @@ function(
     TARGET
     ENABLE
     ENABLE_AS_ERRORS)
-    message(
-        STATUS,
-        ${TARGET}
-        ${ENABLE}
-        ${ENABLE_AS_ERRORS})
+    # message(
+    #     STATUS,
+    #     ${TARGET}
+    #     ${ENABLE}
+    #     ${ENABLE_AS_ERRORS})
     if(NOT ${ENABLE})
-        # message(STATUS "Warnings disabled for: ${TARGET}")
+        message(STATUS "Warnings disabled for: ${TARGET}")
         return()
     endif()
 

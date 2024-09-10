@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.22)
 
-option(ENABLE_TESTING "Enable a Unit Testing Build" OFF)
 option(ENABLE_WARNINGS "Enable warnings" ON)
 option(ENABLE_WARNINGS_AS_ERRORS "Enable warnings as erros" OFF)
+
+option(ENABLE_TESTING "Enable a Unit Testing Build" ON)
+option(ENABLE_COVERAGE "Enable a Code Coverage build" ON)
 
 option(ENABLE_SANITIZE_ADDR "Enable Address Sanitizer" ON)
 option(ENABLE_SANITIZE_UNDEFINED "Enable Address Sanitizer" ON)
@@ -57,6 +59,15 @@ if(ENABLE_SANITIZE_ADDR OR ENABLE_SANITIZE_UNDEFINED)
     endif()
 endif()
 
+if (ENABLE_TESTING AND ENABLE_COVERAGE)
+    include(CodeCoverage)
+    append_coverage_compiler_flags()
+endif()
+
+if(ENABLE_LTO)
+    include(LTO)
+endif()
+
 if(USE_CPM)
     message(STATUS "Using CPM")
     include(CPM)
@@ -64,7 +75,10 @@ if(USE_CPM)
     cpmaddpackage("gh:fmtlib/fmt#9.1.0")
     cpmaddpackage("gh:gabime/spdlog#v1.11.0")
     cpmaddpackage("gh:jarro2783/cxxopts#v3.1.1")
-    cpmaddpackage("gh:catchorg/Catch2#v3.5.3")
+    if(ENABLE_TESTING)
+        cpmaddpackage("gh:catchorg/Catch2#v3.5.3")
+        list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
+    endif()
 else()
     # add_git_submodule(external/json)
     FetchContent_Declare(
@@ -110,6 +124,7 @@ add_subdirectory(configured)
 add_subdirectory(external)
 add_subdirectory(src)
 add_subdirectory(app)
+
 if(ENABLE_TESTING)
     include(CTest)
     enable_testing()
