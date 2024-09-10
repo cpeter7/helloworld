@@ -22,7 +22,7 @@ jobs:
         make prepare
     - name: configure
       run: |
-        cmake -H. -Bbuild -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug"
+        cmake -DENABLE_TESTING=OFF -DENABLE_COVERAGE=OFF -H. -Bbuild -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug"
     - name: building
       run: |
         cmake --build build --config Debug --target docs -j4
