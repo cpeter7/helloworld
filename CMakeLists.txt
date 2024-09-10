@@ -36,7 +36,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 include(AddGitSubmodule)
 include(FetchContent)
-# include(Docs)
+include(Docs)
 include(Tools)
 
 if(ENABLE_WARNINGS)
