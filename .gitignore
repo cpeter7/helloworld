@@ -37,6 +37,7 @@ CMakeCache.txt
 CMakeFiles
 CMakeScripts
 Testing
+docs/
 # Makefile
 cmake_install.cmake
 install_manifest.txt
